@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Vue Child to Parent Event Binding Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <div id = "app">
+        <child-component v-on:show-log = "printText"></child-component> <!-- 3. showLog()에서 수행된 이벤트는 v-on:show-log에 전달되고 최상위 메소드인 printText()가 수행된다. -->
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+    <script>
+        Vue.component('child-component', {
+            template : '<button v-on:click = "showLog">show</button>', // 1. show버튼을 클릭하면 클릭 이벤트 v-on:click="showLog"에 따라 showLog()가 실행된다.
+            methods : {
+                showLog : function () {
+                    this.$emit('show-log'); // 2. $emit('show-log')가 실행되면서 show-log 이벤트가 발생한다.
+                }
+            }
+        });
+
+        var app = new Vue({
+            el : '#app',
+            data : {
+                message : 'hello world!'
+            },
+            methods : {
+                printText : function () {
+                    console.log('부모 컴포넌트가 이벤트를 받았습니다.'); // 4. child-component에서 printText()가 호출되므로 개발자 도구에 log를 찍는다.
+                }
+            }
+        });
+    </script>
+</body>
+</html>

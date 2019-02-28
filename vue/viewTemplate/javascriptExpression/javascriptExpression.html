@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Vue ViewTemplate JavaScript Expression Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <div id = "app">
+        <p>{{ message }}</p> <!-- 3. 정의한 데이터 속성을 텍스트 바인딩한다. -->
+        <p>{{ message + '!!!' }}</p> <!-- 4. 정의한 데이터 속성에 문자열 더하기로 값을 수정한다. -->
+        <p>{{ message.split('').reverse().join('') }}</p> <!-- 5. 정의한 데이터 속성에 자바스크립트 API를 사용하여 값을 반전시킨다. -->
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+    <script>
+        // 1. 뷰 인스턴스 객체를 생성한다.
+        new Vue({
+            data : {
+                message : 'Hello Wolrd!' // 2. 데이터 속성을 정의한다.
+            }
+        }).$mount('#app');
+    </script>
+</body>
+</html>

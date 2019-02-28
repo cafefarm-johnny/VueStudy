@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Vue Named View Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <div id = "app">
+        <!-- 1. div를 생성하고 name 속성으로 component에서 식별할 수 있는 식별자를 작성한다. -->
+        <router-view name = "header"></router-view>
+        <router-view></router-view> <!-- 1-1. name 속성을 정의하지 않을 경우 component에서 'default' 속성으로 접근할 수 있다. -->
+        <router-view name = "footer"></router-view>
+
+        <router-view name = "loginHeader"></router-view>
+        <router-view name = "loginBody"></router-view>
+        <router-view name = "loginFooter"></router-view>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@3.0.1/dist/vue-router.js"></script>
+    <script>
+        // 2. 각 router-view에 붙일 컴포넌트의 내용이 담길 객체를 정의한다.
+        const Header = { template : '<div>헤더 영역입니다.</div>' };
+        const Body = { template : '<div>바디 영역입니다.</div>' };
+        const Footer = { template : '<div>푸터 영역입니다.</div>' };
+
+        const LoginHeader = { template : '<div>로그인 헤더 영역입니다.</div>' };
+        const LoginBody = { template : '<div>로그인 바디 영역입니다.</div>' };
+        const LoginFooter = { template : '<div>로그인 푸터 영역입니다.</div>' };
+
+        // 3. VueRouter 객체를 하나 생성한다.
+        const router = new VueRouter({
+           routes : [
+               {
+                   path : '/', // 4. 네임드 뷰가 실행될 URL을 정의한다.
+                   components : { // 5. 앞에서 router-view에 정의한 name 속성에 따라 연결할 컴포넌트를 정의한다.
+                       default : Body, // 5-1. router-view에 name 속성을 정의하지 않은 경우 default로 컴포넌트를 정의할 수 있다.
+                       header : Header,
+                       footer:  Footer
+                   }
+               },
+               {
+                   path : '/login',
+                   components : {
+                       loginHeader : LoginHeader,
+                       loginBody : LoginBody,
+                       loginFooter : LoginFooter
+                   }
+               }
+           ] 
+        });
+
+        // 6. 뷰 인스턴스 객체를 생성하고 라우터 정보를 정의한다.
+        const app = new Vue({
+            router
+        }).$mount('#app');
+    </script>
+</body>
+</html>

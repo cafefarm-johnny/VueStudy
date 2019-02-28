@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Vue ViewTemplate Advanced Template Technic Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <div id = "app">
+        <p>{{ message }}</p> <!-- 1. 뷰 인스턴스의 데이터 속성에서 message 속성에 정의한 값을 출력한다. -->
+        <p>{{ reversedMsg }}</p><!-- 2. 뷰 인스턴스의 computed 속성에 정의한 함수를 호출한다. -->
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+    <script>
+        new Vue({
+            data : {
+                message : 'Hello World!'
+            },
+            computed : {
+                reversedMsg : function () {
+                    // 3. computed에서 처리한 결과를 리턴한다. 이 결과는 캐싱하여 값을 저장해놓고 호출될 때 재사용한다.
+                    return this.message.split('').reverse().join('');
+                }
+            },
+            mounted : function () {
+                // 4. mounted 속성을 통해 message 속성의 값을 변경하게 되면 computed가 다시 연산을 처리한다.
+                this.message = 'My World!'
+            }
+        }).$mount('#app');
+    </script>
+</body>
+</html>

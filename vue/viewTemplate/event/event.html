@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Vue ViewTemplate Event Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <div id = "app">
+        <button v-on:click = "clickBtn">클릭하세요.</button> <!-- 1. 버튼을 클릭 이벤트가 발생했을 때 함수 바인딩 시키기 -->
+        <button v-on:click = "getArgs(10, 20)">인자를 넘기는 버튼</button> <!-- 2. 바인딩한 함수에 인자 전달하기 -->
+        <button v-on:click = "accessToDom">DOM에 접근하는 버튼</button> <!-- 3. 바인딩한 함수에 DOM 요소 전달하기 -->
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+    <script>
+        new Vue({
+            methods : {
+                clickBtn : function () {
+                    window.alert('잘 하셨어요!');
+                },
+                getArgs : function (arg1, arg2) { // 2-1. HTML 태그에서 인자를 전달하는 경우, 함수에서 인자를 받을 수 있다.
+                    window.alert(arg1 + ' / ' + arg2);
+                },
+                accessToDom : function (event) { // 3-1. HTML 태그에서 인자를 전달하지 않는 경우, 함수에서 인자를 받으면 DOM 요소가 전달된다.
+                    console.log(event);
+                }
+            }
+        }).$mount('#app');
+    </script>
+</body>
+</html>

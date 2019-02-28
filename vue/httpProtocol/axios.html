@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Vue Axios Library Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <div id = "app">
+        <button v-on:click = "getData">프레임워크 목록 가져오기 using Axios</button> <!-- 5. HTTP GET 통신을 보낼 버튼을 생성하고 getData()함수 바인딩하기 -->
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script> <!-- 1. 액시오스 라이브러리 가져오기 -->
+    <script>
+        // 2. 뷰 인스턴스 객체 생성하기
+        new Vue({
+            methods : { // 3. 메소드 속성 정의하기
+                getData : function () {
+                    // 4. 액시오스 라이브러리의 api를 사용하여 HTTP GET 통신 구현하기
+                    axios.get('https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json')
+                    .then(function (res) {
+                        console.log(res);
+                    });
+                }
+            }
+        }).$mount('#app');
+    </script>
+</body>
+</html>
